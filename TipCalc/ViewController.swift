@@ -41,6 +41,8 @@ class ViewController: UIViewController {
         tipControl.selectedSegmentIndex = defaults.integer(forKey: "defaultTipSelected")
         
         tipControl.sendActions(for: UIControlEvents.valueChanged)
+        
+        billField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,8 +51,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onTap(_ sender: Any) {
-        
-        view.endEditing(true)
+        //no action on tap
+        //view.endEditing(true)
     }
     
     @IBAction func calculateShare(_ sender: Any) {
@@ -62,7 +64,7 @@ class ViewController: UIViewController {
         headCountLabel.text = String(format: "%.0f", fixed)
         
         let share = total / fixed
-        shareLabel.text = String(format: "$%.1f", share)
+        shareLabel.text = String(format: "$%.2f", share)
         
     }
 
@@ -80,8 +82,8 @@ class ViewController: UIViewController {
         
         calculateShare(sender)
         
-        if(headCountSlider.alpha == 0) {
-            UIView.animate(withDuration: 0.4, animations:{
+        if(bill > 0 && headCountSlider.alpha == 0) {
+            UIView.animate(withDuration: 2, animations:{
                 self.headCountSlider.alpha = 1;
                 self.headCountLabel.alpha = 1;
                 self.shareLabel.alpha = 1;
